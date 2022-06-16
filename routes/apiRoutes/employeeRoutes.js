@@ -3,8 +3,7 @@ const router = express.Router();
 const db = require("../../db/connection");
 
 router.get("/employees", (req, res) => {
-  const sql = `SELECT employees.id*
-                  FROM employees`;
+  const sql = `SELECT * FROM employees`;
 
   db.query(sql, (err, rows) => {
     if (err) {
