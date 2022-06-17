@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const apiRoutes = require('./routes/apiRoutes');
+const Magic = require('./lib/index');
 
 const db = require('./db/connection');
 
@@ -16,10 +17,9 @@ app.use((req, res) => {
   res.status(400).end();
 });
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log("Database connected.");
-  app.listen(PORT, () => {
-    console.log(`Server is up and running on ${PORT}`);
-  });
-});
+app.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
+  const magic = new Magic
+  magic.seedDatabase();
+  magic.mainMenu();
+})
